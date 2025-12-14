@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoe Collector Game</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+   background: linear-gradient(135deg, #e0e7ff 0%, #cfd9ff 100%);
+        user-select: none;
+        position: relative;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    /* Floating Brand Logos Background */
+      .logo-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .brand-logo {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        opacity: 0.6;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        animation: float 20s infinite ease-in-out;
+
+    }
+   @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        25% {
+            transform: translateY(-30px) rotate(5deg);
+        }
+        50% {
+            transform: translateY(0) rotate(-5deg);
+        }
+        75% {
+            transform: translateY(30px) rotate(3deg);
+        }
+    }
+
+    /* Different animation delays and positions for variety */
+     .brand-logo:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; width: 130px; height: 130px; }
+    .brand-logo:nth-child(2) { top: 12%; left: 85%; animation-delay: 2s; width: 140px; height: 140px; }
+    .brand-logo:nth-child(3) { top: 82%; left: 60%; animation-delay: 4s; width: 110px; height: 110px; }
+    .brand-logo:nth-child(4) { top: 83%; left: 70%; animation-delay: 1s; width: 135px; height: 135px; }
+    .brand-logo:nth-child(5) { top: 85%; left: 30%; animation-delay: 3s; width: 125px; height: 125px; }
+    .brand-logo:nth-child(6) { top: 84%; left: 83%; animation-delay: 5s; width: 120px; height: 120px; }
+    .brand-logo:nth-child(7) { top: 15%; left: 45%; animation-delay: 2.5s; width: 115px; height: 115px; }
+    .brand-logo:nth-child(8) { top: 15%; left: 18%; animation-delay: 4.5s; width: 130px; height: 130px; }
+    .brand-logo:nth-child(9) { top: 10%; left: 70%; animation-delay: 1.5s; width: 120px; height: 120px; }
+    .brand-logo:nth-child(10) { top: 83%; left: 10%; animation-delay: 3.5s; width: 140px; height: 140px; }
+
+    /* Content wrapper to stay above background */
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+
+    nav {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        padding: 20px 40px;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 30px;
+    }
+
+    nav a {
+        color: #e0e7ff;
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    nav a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    nav a:hover::before {
+        left: 100%;
+    }
+
+    nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    nav a.primary {
+        background: linear-gradient(135deg,  #f92424 0%, #36f1f4 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    }
+
+    nav a.primary:hover {
+        background: linear-gradient(135deg,  #f92424 0%, #36f1f4 100%);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+    }
+
+    .container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #gameArea {
+        width: 100%;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 3px solid #222;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+   .shoe {
+        width: 60px;
+        position: absolute;
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+
+    .shoe:hover {
+        transform: scale(1.2);
+    }
+
+    .score-time {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        border-radius: 15px;
+        color: white;
+        font-weight: bold;
+    }
+
+    #startBtn {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border: none;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        transition: all 0.3s;
+    }
+
+    #startBtn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.6);
+    }
+</style>
+</head>
+<body>
+
+<!-- Floating Brand Logos Background -->
+<div class="logo-background">
+    <!-- Replace these src values with your actual brand logo files -->
+    <img src="Nike.png" alt="" class="brand-logo">
+    <img src="adidas.png" alt="" class="brand-logo">
+    <img src="Puma.png" alt="" class="brand-logo">
+    <img src="Reebok.png" alt="" class="brand-logo">
+    <img src="converse.png" alt="" class="brand-logo">
+    <img src="Vans.png" alt="" class="brand-logo">
+    <img src="NewBalance.png" alt="" class="brand-logo">
+    <img src="Jordan.png" alt="" class="brand-logo">
+    <img src="asics 2.png" alt="" class="brand-logo">
+    <img src="UnderArmour.png" alt="" class="brand-logo">
+</div>
+
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="primary">HOME</a>
+            <a href="About.html">ABOUT</a>
+            <a href="index.html" class="primary">CONTACT</a>
+        </nav>
+
+        <div class="text-center">
+            <h1 class="mb-4">👟 Shoe Collector Game</h1>
+
+            <div class="row justify-content-center mb-3">
+                <div class="col-12 col-md-6">
+                    <div class="score-time d-flex justify-content-between fs-4">
+                        <span>Score: <strong id="score">0</strong></span>
+                        <span>Time: <strong id="time">30</strong>s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameArea"></div>
+
+            <button id="startBtn" class="btn btn-lg mt-4">
+                Start Game
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Game Variables
+let score = 0;
+let timeLeft = 30;
+let timerInterval;
+let spawnInterval;
+
+// Shoe Images
+const shoes = [
+    "Airmax95.png",
+    "AirmaxTN.png",
+    "Asics1.png",
+    "AirmaxBlackOW1.png",
+    "AirmaxOffwhite.png",
+    "Jordan1.png",
+    "Offwhite1.png",
+    "Offwhite2.png",
+    "P6000.png",
+    "Panda1.png",
+    "retro4.png"
+];
+
+const gameArea = document.getElementById("gameArea");
+
+// Start Game
+document.getElementById("startBtn").addEventListener("click", startGame);
+
+function startGame() {
+    score = 0;
+    timeLeft = 30;
+    document.getElementById("score").innerText = score;
+    document.getElementById("time").innerText = timeLeft;
+
+    gameArea.innerHTML = "";
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+
+    timerInterval = setInterval(updateTimer, 1000);
+    spawnInterval = setInterval(spawnShoe, 700);
+}
+
+function updateTimer() {
+    timeLeft--;
+    document.getElementById("time").innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        clearInterval(spawnInterval);
+        alert("⏳ Time's up! Final Score: " + score);
+    }
+}
+
+// Shoe Spawner
+function spawnShoe() {
+    const shoe = document.createElement("img");
+    shoe.src = shoes[Math.floor(Math.random() * shoes.length)];
+    shoe.classList.add("shoe");
+
+    const x = Math.random() * (gameArea.clientWidth - 60);
+    const y = Math.random() * (gameArea.clientHeight - 60);
+
+    shoe.style.left = x + "px";
+    shoe.style.top = y + "px";
+
+    shoe.onclick = () => {
+        score++;
+        document.getElementById("score").innerText = score;
+        shoe.remove();
+    };
+
+    gameArea.appendChild(shoe);
+
+    // Remove shoe after 1.5 sec
+    setTimeout(() => {
+        if (shoe.parentNode) shoe.remove();
+    }, 1500);
+}
+</script>
+
+</body>
+</html>

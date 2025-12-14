@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hezran Hernani — Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+
+  <font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif;>
+    <font-display : swap;></font-display>
+
+  <style>
+    /* --- PAGE LOAD ANIMATION --- */
+@keyframes slideshow {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* animate whole page */
+body {
+  animation: slideshow 0.8s ease-out forwards;
+}
+
+/* Animate all main sections */
+section,
+header,
+footer {
+  opacity: 0;
+  animation: slideshow 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Individual animation delays */
+header { animation-delay: 0.1s; }
+section:nth-of-type(1) { animation-delay: 0.2s; }
+section:nth-of-type(2) { animation-delay: 0.4s; }
+section:nth-of-type(3) { animation-delay: 0.6s; }
+footer { animation-delay: 0.8s; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+  }
+  body {
+    padding: 18px;
+  }
+}
+
+
+
+    :root{
+      --bg:#000000;
+      --card:#000000ea;
+      --muted:#ffffff;
+      --accent:#ed3a3a;
+      --glass: rgba(0, 177, 253, 0.346);
+      --glass-2: rgba(3, 45, 255, 0.709);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:linear-gradient(180deg,var(--bg),#000000 120%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:32px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+    
+    header{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+    }
+    .logo{display:flex;gap:12px;align-items:center}
+    .avatar{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#2dd4bf);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021022
+    }
+    nav {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px 40px;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav a {
+            color: #e0e7ff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a.primary {
+            background: linear-gradient(135deg, #f92424 0%, #36f1f4 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        nav a.primary:hover {
+            background: linear-gradient(135deg, #f92424 0%, #36f1f4 100%);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+    .hero{
+      display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px
+    }
+    .intro{background:linear-gradient(180deg,var(--glass),transparent);padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    h1{margin:0;font-size:30px}
+    p.lead{color:var(--muted);margin-top:8px}
+    .cta{margin-top:16px;display:flex;gap:12px}
+    .btn{background:var(--accent);padding:10px 14px;border-radius:10px;color:#fff;text-decoration:none}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .profile-card{background:linear-gradient(180deg,var(--card),#051027);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .profile-card h3{margin:0 0 4px 0}
+    .meta{color:var(--muted);font-size:13px}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .chip{background:var(--glass-2);padding:8px 10px;border-radius:8px;color:var(--muted);font-size:13px}
+
+    .projects{margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .project{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .project h4{margin:0 0 6px 0}
+    .project p{color:var(--muted);font-size:13px}
+    .project .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+
+    footer{margin-top:36px;color:var(--muted);font-size:14px;text-align:center}
+
+    
+
+    
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="avatar">HS</div>
+        <div>
+          <div style="font-weight:700">Hezran Hernani Soares</div>
+          <div style="font-size:12px;color:var(--muted)">Software Engineer Student  • Philippines</div>
+        </div>
+      </div>
+      <nav>
+       <a href="index.html"class="primary">HOME</a>
+        
+         
+        
+        <a href="About.html">ABOUT</a>
+        <a href="#contact" class="primary">CONTACT</a>
+        
+      </nav>
+    </header>
+
+    <section id="about" style="margin-bottom:18px">
+      <!-- Added an explicit About section to match the header link and avoid missing-ID errors -->
+      <div class="intro">
+        <h1>Hi, I’m <span style="background:linear-gradient(90deg,var(--accent),#06b8d4c4);-webkit-background-clip:text;background-clip:text;color:transparent;">Hezran Hernani</span> — I'm a student of Trinity University of Asia </h1>
+        <p class="lead">I'm a 2nd year IT student  </p>
+        <div class="cta">
+          <a class="btn" href="project.html">See projects</a>
+          <a class="btn" href="gamesection.html">Open Game</a>
+          
+        </div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <aside class="profile-card">
+        <img src="hezran.png" alt="avatar" style="width:200px; height:200px; border-radius:50%; object-fit:cover; border:5px solid rgba(0, 177, 253, 0.346); box-shadow:0 0 20px rgba(10, 130, 235, 0.6);">
+        <h3>Hezran Hernani</h3>
+        <div class="meta">Lead Full‑Stack Software Engineering Student</div>
+        <div class="intro" style="padding:5px">
+        <h2 style="margin-top:0">Born </h2>
+        <p class="lead">August,03,2005 Timor-Leste</p>
+        <h2 style ="margin-top:0">From </h2>
+        <p class="lead">Timor - Leste🇹🇱 </p>
+        <h2 style ="margin-top:0">Address </h2>
+        <p class="lead">Philippine🇵🇭</p>
+      </div>
+        <div class="skills">
+          <span class="chip">Web System & Technologies</span>
+          
+        </div>
+
+      </aside>
+
+      <div class="intro" style="padding:20px">
+        <h2 style="margin-top:0">About Me </h2>
+        <p class="lead">I'm a Software Engineer specializing in building efficient, scalable, and user-centered applications. I enjoy solving complex problems, designing clean architectures, and turning ideas into functional software. My primary focus is developing high-quality code, improving systems performance, and delivering reliable solutions.</p>
+        <h2 style ="margin-top:0">Story-driven </h2>
+        <p class="lead">My journey into software engineering began with curiosity—how do apps actually work? That curiosity turned into a passion for building solutions that make life easier. Today, I design and develop modern applications with clean code, strong logic, and user-focused design.</p>
+        <h2 style ="margin-top:0">skills </h2>
+        <p class="lead">I'm a Software Engineer with experience in full-stack development, API design, cloud services, and UI engineering. I turn technical concepts into reliable systems using technologies like JavaScript, Python, React, Node.js, and SQL."</p>
+      </div>
+    </section>
+
+    
+    <section id="contact" style="margin-top:28px">
+  <h2 style="margin:0 0 12px 0">Contact</h2>
+  <p class="lead">Interested in working together? Send a quick message or reach out on LinkedIn / Email.</p>
+  
+  <form action="https://api.web3forms.com/submit" method="POST" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <input type="hidden" name="access_key" value="b4303b56-7afc-4290-b29a-7ac996db3eb9">
+    
+    <input type="text" placeholder="Name" name="name" style="padding:12px;border-radius:8px;border:1px solid rgba(241, 240, 240, 0.869);background:transparent;color:inherit;width:100%" required>
+    
+    <input type="email" placeholder="Email" name="email" style="padding:12px;border-radius:8px;border:1px solid rgba(240, 238, 238, 0.855);background:transparent;color:inherit;width:100%" required>
+    
+    <textarea placeholder="Message" name="message" style="grid-column:1 / -1;padding:12px;border-radius:10px;border:2px solid rgba(255,255,255,0.04);background:transparent;color:inherit;width:100%" rows="6" required></textarea>
+    
+    <button type="submit" style="grid-column:1 / -1;justify-self:start;padding:12px 24px;background:linear-gradient(90deg,#ed3a3a,#06b6d4);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600">Submit</button>
+  </form>
+</section>
+
+    <footer>
+     2025 @2ITSE01
+    </footer>
+  </div>
+
+  <script>
+    // small helper: smooth scroll for internal links
+    // Defensive: ensure the target element exists before calling scrollIntoView
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href = a.getAttribute('href');
+        // ignore plain '#' anchors
+        if(!href || href === '#') return;
+
+        if(href.length>1){
+          // prevent default only if navigation will be handled here
+          e.preventDefault();
+          try{
+            // Prefer getElementById for IDs — slice off the leading '#'
+            const id = href.slice(1);
+            const target = document.getElementById(id);
+            if(target){
+              target.scrollIntoView({behavior:'smooth',block:'start'});
+            } else {
+              // If the target doesn't exist, log a helpful warning and fall back to default behavior
+              console.warn(`Smooth-scroll target not found for href: ${href}`);
+              // As a fallback, change location.hash so the browser behaves normally
+              // (this will not throw; it simply updates the URL)
+              window.location.hash = href;
+            }
+          }catch(err){
+            // In case of unexpected errors, log them to the console for debugging
+            console.error('Error while trying to smooth-scroll to', href, err);
+            // fallback to default link behavior
+            window.location.href = href;
+          }
+        }
+      })
+    })
+  </script>
+</body>
+</html>
